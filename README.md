@@ -1,4 +1,4 @@
-# 永恒领域 (Don't Starve MC)
+# 永恒领域 (The Constant)
 
 [![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.10-brightgreen.svg)](https://www.minecraft.net/)
 [![Mod Loader](https://img.shields.io/badge/Mod%20Loader-Fabric-blue.svg)](https://fabricmc.net/)
