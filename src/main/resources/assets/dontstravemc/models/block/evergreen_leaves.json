@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "dontstravemc:block/evergreen_leaves"
+  }
+}

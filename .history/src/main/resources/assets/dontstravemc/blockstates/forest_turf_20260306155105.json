@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "": [
+      { "model": "dontstravemc:block/turf_block_forest", "uvlock": true },
+      { "model": "dontstravemc:block/turf_block_forest", "y": 90, "uvlock": true },
+      { "model": "dontstravemc:block/turf_block_forest", "y": 180, "uvlock": true },
+      { "model": "dontstravemc:block/turf_block_forest", "y": 270, "uvlock": true }
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button",
+  "textures": {
+    "texture": "dontstravemc:block/evergreen_planks"
+  }
+}

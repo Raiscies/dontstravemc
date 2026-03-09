@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "dontstravemc:block/turf_block_forest"
+    }
+  }
+}

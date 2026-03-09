@@ -1,0 +1,10 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "dontstravemc:block/radio",
+    "textures": {
+      "0": "dontstravemc:block/radio/radio",
+      "1": "dontstravemc:block/radio/radio_button"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "harvested=false": {
+      "model": "dontstravemc:block/grass"
+    },
+    "harvested=true": {
+      "model": "dontstravemc:block/grass_waxed"
+    }
+  }
+}

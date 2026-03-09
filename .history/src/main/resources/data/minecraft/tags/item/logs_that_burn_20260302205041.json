@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "dontstravemc:evergreen_log",
+    "dontstravemc:evergreen_wood",
+    "dontstravemc:stripped_evergreen_log",
+    "dontstravemc:stripped_evergreen_wood"
+  ]
+}

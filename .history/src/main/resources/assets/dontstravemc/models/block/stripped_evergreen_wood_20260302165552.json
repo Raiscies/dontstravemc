@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "dontstravemc:block/stripped_evergreen_log"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "dontstravemc:evergreen_log",
+    "dontstravemc:evergreen_wood",
+    "dontstravemc:stripped_evergreen_log",
+    "dontstravemc:stripped_evergreen_wood",
+    "dontstravemc:evergreen_planks",
+    "dontstravemc:evergreen_stairs",
+    "dontstravemc:evergreen_slab",
+    "dontstravemc:evergreen_fence",
+    "dontstravemc:evergreen_fence_gate",
+    "dontstravemc:evergreen_pressure_plate",
+    "dontstravemc:evergreen_button",
+    "dontstravemc:evergreen_door",
+    "dontstravemc:evergreen_trapdoor"
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "variants": {
+    "withered=true,stage=0,harvest_count=0": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=0,harvest_count=1": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=0,harvest_count=2": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=0,harvest_count=3": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=0,harvest_count=4": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=0,harvest_count=5": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=0,harvest_count=6": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=1,harvest_count=0": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=1,harvest_count=1": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=1,harvest_count=2": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=1,harvest_count=3": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=1,harvest_count=4": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=1,harvest_count=5": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=1,harvest_count=6": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=2,harvest_count=0": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=2,harvest_count=1": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=2,harvest_count=2": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=2,harvest_count=3": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=2,harvest_count=4": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=2,harvest_count=5": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=2,harvest_count=6": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=3,harvest_count=0": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=3,harvest_count=1": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=3,harvest_count=2": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=3,harvest_count=3": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=3,harvest_count=4": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=3,harvest_count=5": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=true,stage=3,harvest_count=6": {
+      "model": "dontstravemc:block/berry_bush_2_withered"
+    },
+    "withered=false,stage=0,harvest_count=0": {
+      "model": "dontstravemc:block/berry_bush_2"
+    },
+    "withered=false,stage=0,harvest_count=1": {
+      "model": "dontstravemc:block/berry_bush_2"
+    },
+    "withered=false,stage=0,harvest_count=2": {
+      "model": "dontstravemc:block/berry_bush_2"
+    },
+    "withered=false,stage=0,harvest_count=3": {
+      "model": "dontstravemc:block/berry_bush_2"
+    },
+    "withered=false,stage=0,harvest_count=4": {
+      "model": "dontstravemc:block/berry_bush_2"
+    },
+    "withered=false,stage=0,harvest_count=5": {
+      "model": "dontstravemc:block/berry_bush_2"
+    },
+    "withered=false,stage=0,harvest_count=6": {
+      "model": "dontstravemc:block/berry_bush_2"
+    },
+    "withered=false,stage=1,harvest_count=0": {
+      "model": "dontstravemc:block/berry_bush_2_stage1"
+    },
+    "withered=false,stage=1,harvest_count=1": {
+      "model": "dontstravemc:block/berry_bush_2_stage1"
+    },
+    "withered=false,stage=1,harvest_count=2": {
+      "model": "dontstravemc:block/berry_bush_2_stage1"
+    },
+    "withered=false,stage=1,harvest_count=3": {
+      "model": "dontstravemc:block/berry_bush_2_stage1"
+    },
+    "withered=false,stage=1,harvest_count=4": {
+      "model": "dontstravemc:block/berry_bush_2_stage1"
+    },
+    "withered=false,stage=1,harvest_count=5": {
+      "model": "dontstravemc:block/berry_bush_2_stage1"
+    },
+    "withered=false,stage=1,harvest_count=6": {
+      "model": "dontstravemc:block/berry_bush_2_stage1"
+    },
+    "withered=false,stage=2,harvest_count=0": {
+      "model": "dontstravemc:block/berry_bush_2_stage2"
+    },
+    "withered=false,stage=2,harvest_count=1": {
+      "model": "dontstravemc:block/berry_bush_2_stage2"
+    },
+    "withered=false,stage=2,harvest_count=2": {
+      "model": "dontstravemc:block/berry_bush_2_stage2"
+    },
+    "withered=false,stage=2,harvest_count=3": {
+      "model": "dontstravemc:block/berry_bush_2_stage2"
+    },
+    "withered=false,stage=2,harvest_count=4": {
+      "model": "dontstravemc:block/berry_bush_2_stage2"
+    },
+    "withered=false,stage=2,harvest_count=5": {
+      "model": "dontstravemc:block/berry_bush_2_stage2"
+    },
+    "withered=false,stage=2,harvest_count=6": {
+      "model": "dontstravemc:block/berry_bush_2_stage2"
+    },
+    "withered=false,stage=3,harvest_count=0": {
+      "model": "dontstravemc:block/berry_bush_2_stage3"
+    },
+    "withered=false,stage=3,harvest_count=1": {
+      "model": "dontstravemc:block/berry_bush_2_stage3"
+    },
+    "withered=false,stage=3,harvest_count=2": {
+      "model": "dontstravemc:block/berry_bush_2_stage3"
+    },
+    "withered=false,stage=3,harvest_count=3": {
+      "model": "dontstravemc:block/berry_bush_2_stage3"
+    },
+    "withered=false,stage=3,harvest_count=4": {
+      "model": "dontstravemc:block/berry_bush_2_stage3"
+    },
+    "withered=false,stage=3,harvest_count=5": {
+      "model": "dontstravemc:block/berry_bush_2_stage3"
+    },
+    "withered=false,stage=3,harvest_count=6": {
+      "model": "dontstravemc:block/berry_bush_2_stage3"
+    }
+  }
+}

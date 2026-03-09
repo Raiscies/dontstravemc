@@ -1,0 +1,21 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "block/thin_block",
+	"texture_size": [8, 8],
+	"textures": {
+		"particle": "dontstravemc:block/sticky_webbing/sticky_webbing",
+		"texture": "dontstravemc:block/sticky_webbing/sticky_webbing"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0.1],
+			"to": [16, 16, 0.1],
+			"shade": false,
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#texture"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#texture"}
+			}
+		}
+	]
+}

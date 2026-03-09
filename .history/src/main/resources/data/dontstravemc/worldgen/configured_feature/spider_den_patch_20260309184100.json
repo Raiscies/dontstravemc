@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "tries": 2,
+    "xz_spread": 15,
+    "y_spread": 0,
+    "feature": {
+      "feature": {
+        "type": "dontstravemc:spider_den",
+        "config": {}
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:all_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_blocks",
+                "offset": [0, -1, 0],
+                "blocks": [
+                  "dontstravemc:forest_turf",
+                  "minecraft:grass_block",
+                  "minecraft:dirt"
+                ]
+              },
+              {
+                "type": "minecraft:matching_blocks",
+                "blocks": ["minecraft:air"]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

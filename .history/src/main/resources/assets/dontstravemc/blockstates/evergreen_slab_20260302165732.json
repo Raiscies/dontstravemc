@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "dontstravemc:block/evergreen_slab" },
+    "type=top": { "model": "dontstravemc:block/evergreen_slab_top" },
+    "type=double": { "model": "dontstravemc:block/evergreen_planks" }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "dontstravemc:evergreen_slab",
+                  "properties": {
+                    "type": "double"
+                  }
+                }
+              ],
+              "count": 2,
+              "add": false
+            },
+            {
+              "function": "minecraft:explosion_ok"
+            }
+          ],
+          "id": "dontstravemc:evergreen_slab"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

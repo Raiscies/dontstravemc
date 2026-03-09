@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "": [
+      { "model": "dontstravemc:block/turf_block_forest" },
+      { "model": "dontstravemc:block/turf_block_forest", "y": 90 },
+      { "model": "dontstravemc:block/turf_block_forest", "y": 180 },
+      { "model": "dontstravemc:block/turf_block_forest", "y": 270 }
+    ]
+  }
+}

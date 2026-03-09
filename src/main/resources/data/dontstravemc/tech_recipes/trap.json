@@ -1,0 +1,11 @@
+{
+  "category": "survival",
+  "result": "dontstravemc:trap",
+  "count": 1,
+  "tech_level": 0,
+  "description": "tooltip.dontstravemc.trap",
+  "ingredients": {
+    "dontstravemc:cut_grass": 6,
+    "dontstravemc:twigs": 2
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "dontstravemc:block/twig"
+    },
+    "facing=south": {
+      "model": "dontstravemc:block/twig",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "dontstravemc:block/twig",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "dontstravemc:block/twig",
+      "y": 90
+    }
+  }
+}

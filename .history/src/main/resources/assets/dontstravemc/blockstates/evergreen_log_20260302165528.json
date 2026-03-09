@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "dontstravemc:block/evergreen_log"
+    },
+    "axis=z": {
+      "model": "dontstravemc:block/evergreen_log",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "dontstravemc:block/evergreen_log",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "id": "dontstravemc:monster_meat",
+          "weight": 50
+        },
+        {
+          "type": "minecraft:item",
+          "id": "minecraft:string",
+          "weight": 25
+        }
+      ]
+    }
+  ]
+}

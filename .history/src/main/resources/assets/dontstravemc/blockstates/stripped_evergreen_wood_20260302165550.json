@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "dontstravemc:block/stripped_evergreen_wood"
+    },
+    "axis=z": {
+      "model": "dontstravemc:block/stripped_evergreen_wood",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "dontstravemc:block/stripped_evergreen_wood",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "category": "tools",
+  "result": "minecraft:stone_hoe",
+  "count": 1,
+  "tech_level": 1,
+  "description": "tooltip.dontstravemc.recipe.stone_hoe",
+  "ingredients": {
+    "minecraft:stick": 2,
+    "minecraft:cobblestone": 2
+  }
+}

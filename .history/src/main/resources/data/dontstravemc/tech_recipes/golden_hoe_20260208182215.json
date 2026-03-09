@@ -1,0 +1,11 @@
+{
+  "category": "tools",
+  "result": "minecraft:golden_hoe",
+  "count": 1,
+  "tech_level": 1,
+  "description": "tooltip.dontstravemc.recipe.golden_hoe",
+  "ingredients": {
+    "minecraft:stick": 2,
+    "minecraft:gold_ingot": 2
+  }
+}

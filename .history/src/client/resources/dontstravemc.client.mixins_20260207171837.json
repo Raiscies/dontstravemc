@@ -1,0 +1,15 @@
+{
+	"required": true,
+	"package": "com.dontstravemc.mixin.client",
+	"compatibilityLevel": "JAVA_21",
+	"client": [
+		"ExampleClientMixin",
+		"GameRendererAccessor",
+		"MixinPostPass",
+		"InventoryScreenMixin",
+		"AbstractContainerScreenAccessor"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

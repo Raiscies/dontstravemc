@@ -1,0 +1,71 @@
+{
+  "has_precipitation": true,
+  "temperature": 0.25,
+  "temperature_modifier": "none",
+  "downfall": 0.8,
+  "effects": {
+    "sky_color": 8233983,
+    "fog_color": 12638463,
+    "water_color": 4020182,
+    "water_fog_color": 329011,
+    "mood_sound": {
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2.0
+    }
+  },
+  "spawners": {
+    "monster": [
+      {
+        "type": "dontstravemc:monster_spider",
+        "weight": 100,
+        "minCount": 1,
+        "maxCount": 2
+      }
+    ],
+    "creature": [
+      {
+        "type": "dontstravemc:rabbit",
+        "weight": 10,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "dontstravemc:butterfly",
+        "weight": 5,
+        "minCount": 1,
+        "maxCount": 2
+      }
+    ],
+    "ambient": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": [],
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "dontstravemc:evergreen_tree_placed"
+    ],
+    [],
+    [],
+    [
+      "dontstravemc:grass_patch_placed",
+      "dontstravemc:twig_patch_placed",
+      "dontstravemc:berry_bush_patch_placed",
+      "dontstravemc:sapling_patch_placed",
+      "dontstravemc:evergreen_sapling_patch_placed",
+      "dontstravemc:rabbit_hole_patch_placed",
+      "dontstravemc:spider_den_patch_placed"
+    ],
+    []
+  ]
+}

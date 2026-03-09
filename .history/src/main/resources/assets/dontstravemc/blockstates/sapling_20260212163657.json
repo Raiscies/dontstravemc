@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "harvested=false": {
+      "model": "dontstravemc:block/sapling"
+    },
+    "harvested=true": {
+      "model": "dontstravemc:block/waxed_sapling"
+    }
+  }
+}

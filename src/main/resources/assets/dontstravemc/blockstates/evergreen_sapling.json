@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "stage=0": {
+      "model": "dontstravemc:block/evergreen_sapling"
+    },
+    "stage=1": {
+      "model": "dontstravemc:block/evergreen_sapling"
+    }
+  }
+}

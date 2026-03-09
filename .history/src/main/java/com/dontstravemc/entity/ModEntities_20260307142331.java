@@ -1,0 +1,152 @@
+package com.dontstravemc.entity;
+
+
+import com.dontstrave;
+import com.dontstravemc.entity.animal.ButterflyEntity;
+import com.dontstravemc.entity.animal.RabbitEntity;
+import com.dontstravemc.entity.animal.RabbitHoleEntity;
+import com.dontstravemc.entity.monster.MonsterSpiderEntity;
+import com.dontstravemc.entity.monster.SpiderDenEntity;
+import com.dontstravemc.entity.trap.TrapEntity;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import software.bernie.geckolib.animatable.GeoEntity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+
+public class ModEntities {
+
+    public static final ResourceKey<EntityType<?>> MONSTER_SPIDER_KEY =
+            ResourceKey.create(
+                    Registries.ENTITY_TYPE,
+                    ResourceLocation.fromNamespaceAndPath(
+                            dontstrave.MOD_ID,
+                            "monster_spider"
+                    )
+            );
+
+    public static final EntityType<MonsterSpiderEntity> MONSTER_SPIDER =
+            Registry.register(
+                    BuiltInRegistries.ENTITY_TYPE,
+                    MONSTER_SPIDER_KEY,
+                    EntityType.Builder.of(MonsterSpiderEntity::new, MobCategory.MONSTER)
+                            .sized(1.4F, 0.9F)
+                            .build(MONSTER_SPIDER_KEY)
+            );
+
+    public static final ResourceKey<EntityType<?>> BUTTERFLY_KEY =
+            ResourceKey.create(
+                    Registries.ENTITY_TYPE,
+                    ResourceLocation.fromNamespaceAndPath(
+                            dontstrave.MOD_ID,
+                            "butterfly"
+                    )
+            );
+
+    public static final EntityType<ButterflyEntity> BUTTERFLY =
+            Registry.register(
+                    BuiltInRegistries.ENTITY_TYPE,
+                    BUTTERFLY_KEY,
+                    EntityType.Builder.of(ButterflyEntity::new, MobCategory.AMBIENT)
+                            .sized(0.5F, 0.5F)
+                            .build(BUTTERFLY_KEY)
+            );
+
+    public static final ResourceKey<EntityType<?>> Spider_Den_KEY =
+            ResourceKey.create(
+                    Registries.ENTITY_TYPE,
+                    ResourceLocation.fromNamespaceAndPath(
+                            dontstrave.MOD_ID,
+                            "spider_den"
+                    )
+            );
+
+    public static final EntityType<SpiderDenEntity> SPIDER_DEN = Registry.register(
+            BuiltInRegistries.ENTITY_TYPE,
+            ResourceLocation.fromNamespaceAndPath("dontstravemc", "spider_den"),
+            EntityType.Builder.of(SpiderDenEntity::new, MobCategory.MONSTER)
+                    .sized(1.5f, 1.5f)
+                    .build(Spider_Den_KEY)
+    );
+ 
+    public static final ResourceKey<EntityType<?>> RABBIT_KEY =
+            ResourceKey.create(
+                    Registries.ENTITY_TYPE,
+                    ResourceLocation.fromNamespaceAndPath(
+                            dontstrave.MOD_ID,
+                            "rabbit"
+                    )
+            );
+ 
+    public static final EntityType<RabbitEntity> RABBIT = Registry.register(
+            BuiltInRegistries.ENTITY_TYPE,
+            RABBIT_KEY,
+            EntityType.Builder.of(RabbitEntity::new, MobCategory.CREATURE)
+                    .sized(0.6f, 0.5f)
+                    .build(RABBIT_KEY)
+    );
+
+    public static final ResourceKey<EntityType<?>> RABBIT_HOLE_KEY =
+            ResourceKey.create(
+                    Registries.ENTITY_TYPE,
+                    ResourceLocation.fromNamespaceAndPath(
+                            dontstrave.MOD_ID,
+                            "rabbit_hole"
+                    )
+            );
+
+    public static final EntityType<RabbitHoleEntity> RABBIT_HOLE = Registry.register(
+            BuiltInRegistries.ENTITY_TYPE,
+            RABBIT_HOLE_KEY,
+            EntityType.Builder.of(RabbitHoleEntity::new, MobCategory.MISC)
+                    .sized(0.5f, 0.3f)
+                    .build(RABBIT_HOLE_KEY)
+    );
+
+    public static final ResourceKey<EntityType<?>> TRAP_KEY =
+            ResourceKey.create(
+                    Registries.ENTITY_TYPE,
+                    ResourceLocation.fromNamespaceAndPath(
+                            dontstrave.MOD_ID,
+                            "trap"
+                    )
+            );
+
+    public static final EntityType<TrapEntity> TRAP = Registry.register(
+            BuiltInRegistries.ENTITY_TYPE,
+            TRAP_KEY,
+            EntityType.Builder.<TrapEntity>of(TrapEntity::new, MobCategory.MISC)
+                    .sized(1.0f, 0.5f)
+                    .build(TRAP_KEY)
+    );
+
+    public static void register() {
+        FabricDefaultAttributeRegistry.register(
+                MONSTER_SPIDER,
+                MonsterSpiderEntity.createSpiderAttributes()
+        );
+        FabricDefaultAttributeRegistry.register(
+                BUTTERFLY,
+                ButterflyEntity.createAttributes()
+        );
+        FabricDefaultAttributeRegistry.register(
+                ModEntities.SPIDER_DEN,
+                SpiderDenEntity.createSpiderDenAttributes()
+        );
+        FabricDefaultAttributeRegistry.register(
+                RABBIT,
+                RabbitEntity.createAttributes()
+        );
+        FabricDefaultAttributeRegistry.register(
+                RABBIT_HOLE,
+                RabbitHoleEntity.createAttributes()
+        );
+    }
+}

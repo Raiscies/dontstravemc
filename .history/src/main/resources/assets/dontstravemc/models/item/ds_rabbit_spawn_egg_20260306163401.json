@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "dontstravemc:item/ds_rabbit_spawn_egg"
+  }
+}

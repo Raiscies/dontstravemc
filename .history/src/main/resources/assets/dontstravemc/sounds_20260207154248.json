@@ -1,0 +1,127 @@
+{
+  "monster_spider_attack": {
+    "category": "hostile",
+    "subtitle": "蜘蛛攻击......",
+    "sounds": [
+      { "name": "dontstravemc:monster/spider/spider66_spider_attack_1" },
+      { "name": "dontstravemc:monster/spider/spider67_spider_attack_10" },
+      { "name": "dontstravemc:monster/spider/spider68_spider_attack_11" },
+      { "name": "dontstravemc:monster/spider/spider69_spider_attack_12" },
+      { "name": "dontstravemc:monster/spider/spider70_spider_attack_13" },
+      { "name": "dontstravemc:monster/spider/spider71_spider_attack_14" },
+      { "name": "dontstravemc:monster/spider/spider72_spider_attack_15" },
+      { "name": "dontstravemc:monster/spider/spider73_spider_attack_2" },
+      { "name": "dontstravemc:monster/spider/spider74_spider_attack_3" },
+      { "name": "dontstravemc:monster/spider/spider75_spider_attack_4" },
+      { "name": "dontstravemc:monster/spider/spider76_spider_attack_5" },
+      { "name": "dontstravemc:monster/spider/spider77_spider_attack_6" },
+      { "name": "dontstravemc:monster/spider/spider78_spider_attack_7" },
+      { "name": "dontstravemc:monster/spider/spider79_spider_attack_8" },
+      { "name": "dontstravemc:monster/spider/spider80_spider_attack_9" }
+    ]
+  },
+  "monster_spider_step": {
+    "category": "hostile",
+    "subtitle": "蜘蛛行走......",
+    "sounds": [
+      "dontstravemc:monster/spider/spider106_spider_step_1",
+      "dontstravemc:monster/spider/spider107_spider_step_2",
+      "dontstravemc:monster/spider/spider108_spider_step_3",
+      "dontstravemc:monster/spider/spider109_spider_step_4",
+      "dontstravemc:monster/spider/spider110_spider_step_5"
+    ]
+  },
+  "monster_spider_death": {
+    "category": "hostile",
+    "subtitle": "蜘蛛死亡",
+    "sounds": [
+      "dontstravemc:monster/spider/spider81_spider_death_1",
+      "dontstravemc:monster/spider/spider82_spider_death_2",
+      "dontstravemc:monster/spider/spider83_spider_death_3"
+    ]
+  },
+  "monster_spider_scream": {
+    "category": "hostile",
+    "subtitle": "蜘蛛尖叫",
+    "sounds": [
+      "dontstravemc:monster/spider/spider94_spider_scream_1",
+      "dontstravemc:monster/spider/spider95_spider_scream_2",
+      "dontstravemc:monster/spider/spider96_spider_scream_3",
+      "dontstravemc:monster/spider/spider97_spider_scream_4",
+      "dontstravemc:monster/spider/spider98_spider_scream_5",
+      "dontstravemc:monster/spider/spider99_spider_scream_6",
+      "dontstravemc:monster/spider/spider100_spider_scream_7"
+    ]
+  },
+  "monster_spider_eat": {
+    "category": "hostile",
+    "subtitle": "蜘蛛吃东西",
+    "sounds": [
+      "dontstravemc:monster/spider/spider84_spider_eat_1",
+      "dontstravemc:monster/spider/spider85_spider_eat_2",
+      "dontstravemc:monster/spider/spider86_spider_eat_3",
+      "dontstravemc:monster/spider/spider87_spider_eat_4",
+      "dontstravemc:monster/spider/spider88_spider_eat_5",
+      "dontstravemc:monster/spider/spider89_spider_eat_6"
+    ]
+  },
+  "monster_spider_sleeping": {
+    "category": "hostile",
+    "subtitle": "蜘蛛正在睡觉",
+    "sounds": [
+      "dontstravemc:monster/spider/spider101_spider_sleeping_1",
+      "dontstravemc:monster/spider/spider102_spider_sleeping_2",
+      "dontstravemc:monster/spider/spider103_spider_sleeping_3",
+      "dontstravemc:monster/spider/spider104_spider_sleeping_4",
+      "dontstravemc:monster/spider/spider105_spider_sleeping_5"
+    ]
+  },
+  "monster_spider_jump": {
+    "category": "hostile",
+    "subtitle": "蜘蛛跳跃",
+    "sounds": [
+      "dontstravemc:monster/spider/spider91_spider_jump_1",
+      "dontstravemc:monster/spider/spider92_spider_jump_2",
+      "dontstravemc:monster/spider/spider93_spider_jump_3"
+    ]
+  },
+  "monster_spider_wakeup": {
+    "category": "hostile",
+    "subtitle": "蜘蛛苏醒",
+    "sounds": [
+      "dontstravemc:monster/spider/spider111_spider_wakeup_1",
+      "dontstravemc:monster/spider/spider112_spider_wakeup_2",
+      "dontstravemc:monster/spider/spider113_spider_wakeup_3"
+    ]
+  },
+  "monster_spider_hurt": {
+    "category": "hostile",
+    "subtitle": "蜘蛛受伤",
+    "sounds": [
+      "dontstravemc:monster/spider/spider127_blood_squirt"
+    ]
+  },
+  "monster_spider_sleep": {
+    "category": "hostile",
+    "subtitle": "蜘蛛准备睡觉",
+    "sounds": [
+      "dontstravemc:monster/spider/spider90_spider_fallasleep_1"
+    ]
+  },
+  "spiderden_hurt": {
+    "category": "hostile",
+    "subtitle": "蜘蛛巢受伤",
+    "sounds": [
+      "dontstravemc:monster/spider/spider5_spiderlair_hit_1",
+      "dontstravemc:monster/spider/spider6_spiderlair_hit_2",
+      "dontstravemc:monster/spider/spider7_spiderlair_hit_3"
+    ]
+  },
+  "spiderden_death": {
+    "category": "hostile",
+    "subtitle": "蜘蛛巢死亡",
+    "sounds": [
+      "dontstravemc:monster/spider/spider4_spiderlair_destory_1"
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "dontstravemc:the_constant",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "layers": [
+        {
+          "block": "minecraft:bedrock",
+          "height": 1
+        },
+        {
+          "block": "minecraft:stone",
+          "height": 2
+        },
+        {
+          "block": "minecraft:dirt",
+          "height": 1
+        },
+        {
+          "block": "dontstravemc:forest_turf",
+          "height": 1
+        }
+      ],
+      "biome": "dontstravemc:evergreen_forest",
+      "lakes": false,
+      "features": true,
+      "structure_overrides": []
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "dontstravemc:block/stripped_evergreen_log_top",
+    "side": "dontstravemc:block/stripped_evergreen_log"
+  }
+}

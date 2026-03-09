@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "dontstravemc:block/evergreen_planks",
+    "top": "dontstravemc:block/evergreen_planks",
+    "side": "dontstravemc:block/evergreen_planks"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "dontstravemc:block/evergreen_door_top"
+  }
+}

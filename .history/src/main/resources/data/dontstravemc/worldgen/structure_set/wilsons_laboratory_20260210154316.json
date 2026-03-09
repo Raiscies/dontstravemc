@@ -1,0 +1,15 @@
+{
+  "structures": [
+    {
+      "structure": "dontstravemc:wilsons_laboratory",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 10,
+    "separation": 5,
+    "salt": 12345678,
+    "spread_type": "linear"
+  }
+}
