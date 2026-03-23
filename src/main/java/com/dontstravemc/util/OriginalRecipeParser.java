@@ -439,19 +439,23 @@ abstract class AbstractRecipeDef extends ASTNode {
     public final String recipeDesc;
     public final String recipeDescTranslated;
 
-    public AbstractRecipeDef(String itemName, List<IngredientDef> ingredients, List<ListItem> configs, POEntry poEntry) {
+    public AbstractRecipeDef(String itemName, List<IngredientDef> ingredients, List<ListItem> configs, POEntry itemTexts, POEntry recipeDescTexts) {
         this.itemName = itemName;
         this.ingredients = ingredients;
         this.configs = configs;
 
-        if (poEntry != null) {
-            this.itemTextName = poEntry.msgid;
-            this.itemTextNameTranslated = poEntry.msgstr;
-            this.recipeDesc = poEntry.recipeDesc;
-            this.recipeDescTranslated = poEntry.recipeDescTranslated;
-        } else {
+
+        if (itemTexts != null) {
+            this.itemTextName = itemTexts.msgid;
+            this.itemTextNameTranslated = itemTexts.msgstr;
+        }else {
             this.itemTextName = null;
             this.itemTextNameTranslated = null;
+        }
+        if(recipeDescTexts != null) {
+            this.recipeDesc = recipeDescTexts.msgid;
+            this.recipeDescTranslated = recipeDescTexts.msgstr;
+        } else {
             this.recipeDesc = null;
             this.recipeDescTranslated = null;
         }
@@ -465,11 +469,10 @@ abstract class AbstractRecipeDef extends ASTNode {
 class RecipeDef extends AbstractRecipeDef {
     public final String technologyConstraint;
 
-    public RecipeDef(String itemName, List<IngredientDef> ingredients, String technologyConstraint, List<ListItem> configs, POEntry poEntry) {
-        super(itemName, ingredients, configs, poEntry);
+    public RecipeDef(String itemName, List<IngredientDef> ingredients, String technologyConstraint, List<ListItem> configs, POEntry itemTexts, POEntry recipeDescTexts) {
+        super(itemName, ingredients, configs, itemTexts, recipeDescTexts);
 
         this.technologyConstraint = technologyConstraint;
-
     }
 
     @Override
@@ -481,8 +484,8 @@ class RecipeDef extends AbstractRecipeDef {
 
 class DeconstructRecipeDef extends AbstractRecipeDef {
 
-    public DeconstructRecipeDef(String itemName, List<IngredientDef> ingredients, List<ListItem> configs, POEntry poEntry) {
-        super(itemName, ingredients, configs, poEntry);
+    public DeconstructRecipeDef(String itemName, List<IngredientDef> ingredients, List<ListItem> configs, POEntry itemTexts, POEntry recipeDescTexts) {
+        super(itemName, ingredients, configs, itemTexts, recipeDescTexts);
 
     }
 
@@ -632,7 +635,7 @@ class Parser {
         expect(TokenType.RPAREN);
         advance();
         
-        return new RecipeDef(itemName, ingredients, techConstraint, configs, poEntries.get(itemName));
+        return new RecipeDef(itemName, ingredients, techConstraint, configs, getItemTexts(itemName), getRecipeDescTexts(itemName));
     }
 
     /**
@@ -663,7 +666,7 @@ class Parser {
         expect(TokenType.RPAREN);
         advance();
         
-        return new DeconstructRecipeDef(itemName, ingredients, configs, poEntries.get(itemName));
+        return new DeconstructRecipeDef(itemName, ingredients, configs, getItemTexts(itemName), getRecipeDescTexts(itemName));
     }
 
     /**
@@ -897,6 +900,15 @@ class Parser {
         
         return new FunctionConfig(funcContent.trim());
     }
+
+    private POEntry getItemTexts(String itemName) {
+        String key = "STRINGS.NAMES." + itemName.toUpperCase();
+        return poEntries.get(key);
+    }
+    private POEntry getRecipeDescTexts(String itemName) {
+        String key = "STRINGS.RECIPE_DESC." + itemName.toUpperCase();
+        return poEntries.get(key);
+    }
 }
 
 // ==================== Parse Exception ====================
@@ -1074,9 +1086,32 @@ public class OriginalRecipeParser {
     }
 
     /**
+     * Convert ingredients list to JSON
+     */
+    private static void appendIngredients(StringBuilder sb, List<IngredientDef> ingredients, boolean includeExtraParams) {
+        sb.append("    \"ingredients\": [\n");
+        for (int j = 0; j < ingredients.size(); j++) {
+            IngredientDef ing = ingredients.get(j);
+            sb.append("      {\"type\": \"").append(escapeJson(ing.ingredientType)).append("\", \"amount\": ").append(ing.amount);
+            if (includeExtraParams && !ing.extraParams.isEmpty()) {
+                sb.append(", \"extra\": [");
+                for (int k = 0; k < ing.extraParams.size(); k++) {
+                    sb.append("\"").append(escapeJson(ing.extraParams.get(k))).append("\"");
+                    if (k < ing.extraParams.size() - 1) sb.append(", ");
+                }
+                sb.append("]");
+            }
+            sb.append("}");
+            if (j < ingredients.size() - 1) sb.append(",");
+            sb.append("\n");
+        }
+        sb.append("    ]");
+    }
+
+    /**
      * Convert AbstractRecipeDef common fields to JSON (includes ingredients)
      */
-    private static void appendAbstractRecipeFields(StringBuilder sb, AbstractRecipeDef node) {
+    private static void appendAbstractRecipeFields(StringBuilder sb, AbstractRecipeDef node, boolean includeExtraParams) {
         sb.append("    \"name\": \"").append(escapeJson(node.itemName)).append("\",\n");
         
         if (node.itemTextName != null) {
@@ -1092,24 +1127,7 @@ public class OriginalRecipeParser {
             sb.append("    \"recipe_desc_trans\": \"").append(escapeJson(node.recipeDescTranslated)).append("\",\n");
         }
         
-        // Append ingredients list
-        sb.append("    \"ingredients\": [\n");
-        for (int j = 0; j < node.ingredients.size(); j++) {
-            IngredientDef ing = node.ingredients.get(j);
-            sb.append("      {\"type\": \"").append(escapeJson(ing.ingredientType)).append("\", \"amount\": ").append(ing.amount);
-            if (!ing.extraParams.isEmpty()) {
-                sb.append(", \"extra\": [");
-                for (int k = 0; k < ing.extraParams.size(); k++) {
-                    sb.append("\"").append(escapeJson(ing.extraParams.get(k))).append("\"");
-                    if (k < ing.extraParams.size() - 1) sb.append(", ");
-                }
-                sb.append("]");
-            }
-            sb.append("}");
-            if (j < node.ingredients.size() - 1) sb.append(",");
-            sb.append("\n");
-        }
-        sb.append("    ]");
+        appendIngredients(sb, node.ingredients, includeExtraParams);
     }
 
     /**
@@ -1133,7 +1151,7 @@ public class OriginalRecipeParser {
         sb.append("  {\n");
         sb.append("    \"type\": \"recipe\",\n");
         
-        appendAbstractRecipeFields(sb, node);
+        appendAbstractRecipeFields(sb, node, false);
         sb.append(",\n");
         
         sb.append("    \"tech\": \"").append(escapeJson(node.technologyConstraint)).append("\"\n");
@@ -1150,7 +1168,7 @@ public class OriginalRecipeParser {
         sb.append("  {\n");
         sb.append("    \"type\": \"deconstruct\",\n");
         
-        appendAbstractRecipeFields(sb, node);
+        appendAbstractRecipeFields(sb, node, false);
         sb.append("\n");
         
         sb.append("  }");

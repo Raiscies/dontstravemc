@@ -19,23 +19,16 @@ class POEntry {
     public final String msgid;
     public final String msgstr;
 
-    // from STRINGS.RECIPE_DESC.*
-    public String recipeDesc; // msgid 
-    public String recipeDescTranslated; // msgstr
-
     public POEntry(String msgid, String msgstr) {
         this.msgid = msgid;
         this.msgstr = msgstr;
     }
 
-    public void setRecipeDesc(String recipe_desc, String recipe_desc_trans) {
-        this.recipeDesc = recipe_desc;
-        this.recipeDescTranslated = recipe_desc_trans;
-    }
 
     @Override
     public String toString() {
-        return String.format("POEntry(msgid=%s, msgstr=%s, recipe_desc=%s, recipe_desc_trans=%s)", msgid, msgstr, recipeDesc, recipeDescTranslated);
+        // return String.format("POEntry(msgid=%s, msgstr=%s, recipe_desc=%s, recipe_desc_trans=%s)", msgid, msgstr, recipeDesc, recipeDescTranslated);
+        return String.format("POEntry(msgid=%s, msgstr=%s)", msgid, msgstr);
     }
 }
 
@@ -69,9 +62,7 @@ public class POFileParser {
         String msgctxt = null;
         String msgid = null;
         String msgstr = null;
-        
-        int len_of_msgctxt_prefix = "STRINGS.NAMES.".length();
-        int len_of_recipe_desc_prefix = "STRINGS.RECIPE_DESC.".length();
+
         for (String line : lines) {
             String trimmed = line.trim();
             
@@ -83,9 +74,9 @@ public class POFileParser {
             // Check for each keyword
             if (trimmed.startsWith("msgctxt")) {
                 // If we encounter a new msgctxt but haven't completed the previous entry, reset
+                msgctxt = parseString(trimmed.substring(7));
                 msgid = null;
                 msgstr = null;
-                msgctxt = parseString(trimmed.substring(7));
             } else if (trimmed.startsWith("msgid")) {
                 msgid = parseString(trimmed.substring(5));
             } else if (trimmed.startsWith("msgstr")) {
@@ -93,22 +84,8 @@ public class POFileParser {
             }
             // If line doesn't start with any known keyword, skip it
             
-            // When we have all three, add to result
             if (msgctxt != null && msgid != null && msgstr != null) {
-                // Only keep entries that start with STRINGS.NAMES. and trim the prefix
-                if (msgctxt.startsWith("STRINGS.NAMES.")) {
-                    String key = msgctxt.substring(len_of_msgctxt_prefix).toLowerCase();
-                    result.put(key, new POEntry(msgid, msgstr));
-                }else if (msgctxt.startsWith("STRINGS.RECIPE_DESC.")) {
-                    String key = msgctxt.substring(len_of_recipe_desc_prefix).toLowerCase();
-                    POEntry entry = result.get(key);
-                    if (entry != null) {
-                        entry.setRecipeDesc(msgid, msgstr);
-                    }
-                }
-                msgctxt = null;
-                msgid = null;
-                msgstr = null;
+                result.put(msgctxt, new POEntry(msgid, msgstr));
             }
         }
         
