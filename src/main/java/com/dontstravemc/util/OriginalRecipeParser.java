@@ -14,6 +14,7 @@ import java.util.function.Consumer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.SerializedName;
 
 
 /*
@@ -49,6 +50,88 @@ import com.google.gson.GsonBuilder;
  * S -> RecipeDef | DeconstructRecipeDef
  * 
  */
+
+
+// ==================== JSON POJO Classes ====================
+
+class JsonIngredient {
+    @SerializedName("type")
+    public String type;
+    
+    @SerializedName("amount")
+    public int amount;
+    
+    @SerializedName("extra")
+    public List<String> extra;
+
+    public JsonIngredient(String type, int amount, List<String> extra) {
+        this.type = type;
+        this.amount = amount;
+        this.extra = extra;
+    }
+}
+
+class JsonConfigValue {
+    // Can be String, Number, String (identifier), or List
+    public Object value;
+
+    public JsonConfigValue(Object value) {
+        this.value = value;
+    }
+}
+
+class JsonConfig {
+    public String key;
+    public Object value;
+
+    public JsonConfig(String key, Object value) {
+        this.key = key;
+        this.value = value;
+    }
+}
+
+class JsonRecipe {
+    @SerializedName("type")
+    public String type;
+    
+    @SerializedName("name")
+    public String name;
+    
+    @SerializedName("text")
+    public String text;
+    
+    @SerializedName("text_trans")
+    public String textTrans;
+    
+    @SerializedName("recipe_desc")
+    public String recipeDesc;
+    
+    @SerializedName("recipe_desc_trans")
+    public String recipeDescTrans;
+    
+    @SerializedName("ingredients")
+    public List<JsonIngredient> ingredients;
+    
+    @SerializedName("tech")
+    public String tech;
+    
+    @SerializedName("configs")
+    public List<JsonConfig> configs;
+
+    public JsonRecipe(String type, String name, String text, String textTrans, 
+                      String recipeDesc, String recipeDescTrans, 
+                      List<JsonIngredient> ingredients, String tech, List<JsonConfig> configs) {
+        this.type = type;
+        this.name = name;
+        this.text = text;
+        this.textTrans = textTrans;
+        this.recipeDesc = recipeDesc;
+        this.recipeDescTrans = recipeDescTrans;
+        this.ingredients = ingredients;
+        this.tech = tech;
+        this.configs = configs;
+    }
+}
 
 
 // ==================== Token Definitions ====================
@@ -1013,199 +1096,136 @@ public class OriginalRecipeParser {
     }
 
     /**
-     * Escape a string for JSON
+     * Convert AST nodes to JSON using Gson
      */
-    private static String escapeJson(String s) {
-        if (s == null) return "";
-        return s.replace("\\", "\\\\")
-                .replace("\"", "\\\"")
-                .replace("\n", "\\n")
-                .replace("\r", "\\r")
-                .replace("\t", "\\t");
-    }
-
-    /**
-     * Convert a Term to JSON string
-     */
-    private static String termToJson(Term term) {
-        Object value = term.value;
-        if (value instanceof String string) {
-            return "\"" + escapeJson(string) + "\"";
-        } else if (value instanceof Number) {
-            return value.toString();
-        } else if (value instanceof ConfigEntry configEntry) {
-            return configEntryToJson(configEntry);
-        }
-        return "\"unknown\"";
-    }
-
-    /**
-     * Convert a ListItem to JSON string
-     */
-    private static String listItemToJson(ListItem item) {
-        Object value = item.value;
-        if (value instanceof ListValue listValue) {
-            return listValueToJson(listValue);
-        } else if (value instanceof Term term) {
-            return termToJson(term);
-        } else if (value instanceof ConfigEntry configEntry) {
-            return configEntryToJson(configEntry);
-        }
-        return "\"unknown\"";
-    }
-
-    /**
-     * Convert a ListValue to JSON string
-     */
-    private static String listValueToJson(ListValue listValue) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[\n");
-        for (int i = 0; i < listValue.items.size(); i++) {
-            sb.append("  ").append(listItemToJson(listValue.items.get(i)));
-            if (i < listValue.items.size() - 1) sb.append(",");
-            sb.append("\n");
-        }
-        sb.append("]");
-        return sb.toString();
-    }
-
-    /**
-     * Convert a ConfigEntry to JSON string (key: value)
-     */
-    private static String configEntryToJson(ConfigEntry config) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\"").append(escapeJson(config.key)).append("\": ");
-        if (config.value instanceof String string) {
-            sb.append("\"").append(escapeJson(string)).append("\"");
-        } else if (config.value instanceof Number) {
-            sb.append(config.value);
-        } else if (config.value instanceof FunctionConfig functionConfig) {
-            sb.append("\"").append(escapeJson(functionConfig.content)).append("\"");
-        } else if (config.value instanceof ListValue listValue) {
-            sb.append(listValueToJson(listValue));
-        }
-        return sb.toString();
-    }
-
-    /**
-     * Convert ingredients list to JSON
-     */
-    private static void appendIngredients(StringBuilder sb, List<IngredientDef> ingredients, boolean includeExtraParams) {
-        sb.append("    \"ingredients\": [\n");
-        for (int j = 0; j < ingredients.size(); j++) {
-            IngredientDef ing = ingredients.get(j);
-            sb.append("      {\"type\": \"").append(escapeJson(ing.ingredientType)).append("\", \"amount\": ").append(ing.amount);
-            if (includeExtraParams && !ing.extraParams.isEmpty()) {
-                sb.append(", \"extra\": [");
-                for (int k = 0; k < ing.extraParams.size(); k++) {
-                    sb.append("\"").append(escapeJson(ing.extraParams.get(k))).append("\"");
-                    if (k < ing.extraParams.size() - 1) sb.append(", ");
-                }
-                sb.append("]");
-            }
-            sb.append("}");
-            if (j < ingredients.size() - 1) sb.append(",");
-            sb.append("\n");
-        }
-        sb.append("    ]");
-    }
-
-    /**
-     * Convert AbstractRecipeDef common fields to JSON (includes ingredients)
-     */
-    private static void appendAbstractRecipeFields(StringBuilder sb, AbstractRecipeDef node, boolean includeExtraParams) {
-        sb.append("    \"name\": \"").append(escapeJson(node.itemName)).append("\",\n");
+    private static String nodesToJson(List<ASTNode> nodes, Gson gson) {
+        List<JsonRecipe> recipes = new ArrayList<>();
         
-        if (node.itemTextName != null) {
-            sb.append("    \"text\": \"").append(escapeJson(node.itemTextName)).append("\",\n");
-        }
-        if (node.itemTextNameTranslated != null) {
-            sb.append("    \"text_trans\": \"").append(escapeJson(node.itemTextNameTranslated)).append("\",\n");
-        }
-        if (node.recipeDesc != null) {
-            sb.append("    \"recipe_desc\": \"").append(escapeJson(node.recipeDesc)).append("\",\n");
-        }
-        if (node.recipeDescTranslated != null) {
-            sb.append("    \"recipe_desc_trans\": \"").append(escapeJson(node.recipeDescTranslated)).append("\",\n");
-        }
-        
-        appendIngredients(sb, node.ingredients, includeExtraParams);
-    }
-
-    /**
-     * Convert configs list to JSON
-     */
-    private static void appendConfigs(StringBuilder sb, List<ListItem> configs) {
-        sb.append("    \"configs\": [\n");
-        for (int j = 0; j < configs.size(); j++) {
-            sb.append("      {").append(listItemToJson(configs.get(j))).append("}");
-            if (j < configs.size() - 1) sb.append(",");
-            sb.append("\n");
-        }
-        sb.append("    ]");
-    }
-
-    /**
-     * Convert a RecipeDef node to JSON
-     */
-    private static String recipeDefToJson(RecipeDef node) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("  {\n");
-        sb.append("    \"type\": \"recipe\",\n");
-        
-        appendAbstractRecipeFields(sb, node, false);
-        sb.append(",\n");
-        
-        sb.append("    \"tech\": \"").append(escapeJson(node.technologyConstraint)).append("\"\n");
-        
-        sb.append("  }");
-        return sb.toString();
-    }
-
-    /**
-     * Convert a DeconstructRecipeDef node to JSON
-     */
-    private static String deconstructRecipeDefToJson(DeconstructRecipeDef node) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("  {\n");
-        sb.append("    \"type\": \"deconstruct\",\n");
-        
-        appendAbstractRecipeFields(sb, node, false);
-        sb.append("\n");
-        
-        sb.append("  }");
-        return sb.toString();
-    }
-
-    /**
-     * Convert AST nodes to JSON
-     */
-    private static String nodesToJson(List<ASTNode> nodes) {
-        StringBuilder json = new StringBuilder();
-        json.append("[\n");
-        
-        for (int i = 0; i < nodes.size(); i++) {
-            ASTNode node = nodes.get(i);
-            String nodeJson;
-            
+        for (ASTNode node : nodes) {
             switch (node) {
-                case RecipeDef recipeDef 
-                    -> nodeJson = recipeDefToJson(recipeDef);
-                case DeconstructRecipeDef deconstructRecipeDef 
-                    -> nodeJson = deconstructRecipeDefToJson(deconstructRecipeDef);
-                default 
-                    -> {
-                    continue;
+                case RecipeDef recipeDef -> {
+                    // Convert ingredients
+                    List<JsonIngredient> ingredients = new ArrayList<>();
+                    for (IngredientDef ing : recipeDef.ingredients) {
+                        ingredients.add(new JsonIngredient(
+                            ing.ingredientType,
+                            ing.amount,
+                            ing.extraParams != null && !ing.extraParams.isEmpty() ? ing.extraParams : null
+                        ));
+                    }
+                    
+                    // Convert configs
+                    List<JsonConfig> configs = convertConfigs(recipeDef.configs);
+                    
+                    JsonRecipe recipe = new JsonRecipe(
+                        "recipe",
+                        recipeDef.itemName,
+                        recipeDef.itemTextName,
+                        recipeDef.itemTextNameTranslated,
+                        recipeDef.recipeDesc,
+                        recipeDef.recipeDescTranslated,
+                        ingredients,
+                        recipeDef.technologyConstraint,
+                        configs
+                    );
+                    recipes.add(recipe);
+                }
+                case DeconstructRecipeDef deconstructRecipeDef -> {
+                    // Convert ingredients
+                    List<JsonIngredient> ingredients = new ArrayList<>();
+                    for (IngredientDef ing : deconstructRecipeDef.ingredients) {
+                        ingredients.add(new JsonIngredient(
+                            ing.ingredientType,
+                            ing.amount,
+                            ing.extraParams != null && !ing.extraParams.isEmpty() ? ing.extraParams : null
+                        ));
+                    }
+                    
+                    // Convert configs
+                    List<JsonConfig> configs = convertConfigs(deconstructRecipeDef.configs);
+                    
+                    JsonRecipe recipe = new JsonRecipe(
+                        "deconstruct",
+                        deconstructRecipeDef.itemName,
+                        deconstructRecipeDef.itemTextName,
+                        deconstructRecipeDef.itemTextNameTranslated,
+                        deconstructRecipeDef.recipeDesc,
+                        deconstructRecipeDef.recipeDescTranslated,
+                        ingredients,
+                        null,
+                        configs
+                    );
+                    recipes.add(recipe);
+                }
+                default -> {
+                    // Skip unknown node types
                 }
             }
-            
-            json.append(nodeJson);
-            if (i < nodes.size() - 1) json.append(",");
-            json.append("\n");
         }
         
-        json.append("]");
-        return json.toString();
+        return gson.toJson(recipes);
+    }
+
+    /**
+     * Convert config ListItems to JsonConfig list
+     */
+    private static List<JsonConfig> convertConfigs(List<ListItem> configs) {
+        if (configs == null || configs.isEmpty()) {
+            return null;
+        }
+        
+        List<JsonConfig> result = new ArrayList<>();
+        for (ListItem item : configs) {
+            Object value = item.value;
+            if (value instanceof ConfigEntry configEntry) {
+                result.add(new JsonConfig(configEntry.key, convertConfigValue(configEntry.value)));
+            } else if (value instanceof Term term) {
+                // Handle Term as a config entry with numeric index
+                result.add(new JsonConfig(String.valueOf(result.size()), convertConfigValue(term.value)));
+            }
+        }
+        
+        return result.isEmpty() ? null : result;
+    }
+
+    /**
+     * Convert a config value to JSON-compatible object
+     */
+    private static Object convertConfigValue(Object value) {
+        if (value == null) {
+            return null;
+        }
+        if (value instanceof String || value instanceof Number) {
+            return value;
+        }
+        if (value instanceof FunctionConfig funcConfig) {
+            return funcConfig.content;
+        }
+        if (value instanceof ListValue listValue) {
+            return convertListValue(listValue);
+        }
+        // Default to string representation
+        return value.toString();
+    }
+
+    /**
+     * Convert ListValue to a list of JSON-compatible objects
+     */
+    private static List<Object> convertListValue(ListValue listValue) {
+        List<Object> result = new ArrayList<>();
+        for (ListItem item : listValue.items) {
+            if (item.value instanceof ListValue nested) {
+                result.add(convertListValue(nested));
+            } else if (item.value instanceof Term term) {
+                result.add(convertConfigValue(term.value));
+            } else if (item.value instanceof ConfigEntry configEntry) {
+                // For config entries in a list, create a mini map
+                java.util.Map<String, Object> map = new java.util.HashMap<>();
+                map.put(configEntry.key, convertConfigValue(configEntry.value));
+                result.add(map);
+            }
+        }
+        return result;
     }
 
     /**
@@ -1263,8 +1283,8 @@ public class OriginalRecipeParser {
             
             List<ASTNode> nodes = parse(content, poEntries);
             
-            // Output as JSON to file
-            String json = nodesToJson(nodes);
+            // Output as JSON to file using Gson
+            String json = nodesToJson(nodes, gson);
             writeToFile(json, outputPath);
             
             System.out.println("Successfully wrote parsed recipes to: " + outputPath);
