@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 /*
@@ -1237,6 +1239,8 @@ public class OriginalRecipeParser {
      * Example usage and testing
      */
     public static void main(String[] args) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
         if (args.length < 2) {
             System.err.println("Usage: java OriginalRecipeParser <input_recipe_file> [input_po_file] <output_file>");
             System.err.println("  <input_recipe_file> - Path to the recipes.lua file to parse");
@@ -1255,7 +1259,7 @@ public class OriginalRecipeParser {
             Path poPath = poFilePath != null ? resolvePath(poFilePath) : null;
 
             String content = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
-            HashMap<String, POEntry> poEntries = poPath != null ? POFileParser.parseFile(poPath) : new HashMap<>();
+            HashMap<String, POEntry> poEntries = poPath != null ? POFileReader.parseFile(poPath) : new HashMap<>();
             
             List<ASTNode> nodes = parse(content, poEntries);
             

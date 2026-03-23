@@ -32,7 +32,7 @@ class POEntry {
     }
 }
 
-public class POFileParser {
+public class POFileReader {
 
     /**
      * Parse PO file from file path.
