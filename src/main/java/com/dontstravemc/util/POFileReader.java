@@ -24,7 +24,6 @@ class POEntry {
         this.msgstr = msgstr;
     }
 
-
     @Override
     public String toString() {
         // return String.format("POEntry(msgid=%s, msgstr=%s, recipe_desc=%s, recipe_desc_trans=%s)", msgid, msgstr, recipeDesc, recipeDescTranslated);

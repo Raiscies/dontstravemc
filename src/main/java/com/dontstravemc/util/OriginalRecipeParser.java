@@ -1259,20 +1259,19 @@ public class OriginalRecipeParser {
      * Example usage and testing
      */
     public static void main(String[] args) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
         if (args.length < 2) {
             System.err.println("Usage: java OriginalRecipeParser <input_recipe_file> [input_po_file] <output_file>");
             System.err.println("  <input_recipe_file> - Path to the recipes.lua file to parse");
-            System.err.println("  [input_po_file>]     - Path to the .po file containing translations");
+            System.err.println("  [input_po_file>]    - Path to the .po file containing translations");
             System.err.println("  <output_file>       - Path to the output JSON file");
             return;
         }
-
+        
         String inputPath = args[0];
         String poFilePath = args.length > 2 ? args[1] : null;
         String outputPath = args.length > 2 ? args[2] : args[1];
-
+        
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try {
             // Read file content from the given path (supports relative paths)
             Path path = resolvePath(inputPath);
