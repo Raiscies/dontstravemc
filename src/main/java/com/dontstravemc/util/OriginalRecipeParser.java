@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 import com.google.gson.Gson;
@@ -110,17 +111,19 @@ class JsonRecipe {
     public String recipeDescTrans;
     
     @SerializedName("ingredients")
-    public List<JsonIngredient> ingredients;
+    public Map<String, Integer> ingredients;
     
     @SerializedName("tech")
     public String tech;
     
-    @SerializedName("configs")
-    public List<JsonConfig> configs;
+    // something wrong with it for now
+    // and it does not important
+    // @SerializedName("configs")
+    // public List<JsonConfig> configs;
 
     public JsonRecipe(String type, String name, String text, String textTrans, 
                       String recipeDesc, String recipeDescTrans, 
-                      List<JsonIngredient> ingredients, String tech, List<JsonConfig> configs) {
+                      Map<String, Integer> ingredients, String tech/* , List<JsonConfig> configs = null*/) {
         this.type = type;
         this.name = name;
         this.text = text;
@@ -129,7 +132,7 @@ class JsonRecipe {
         this.recipeDescTrans = recipeDescTrans;
         this.ingredients = ingredients;
         this.tech = tech;
-        this.configs = configs;
+        // this.configs = configs;
     }
 }
 
@@ -1104,18 +1107,14 @@ public class OriginalRecipeParser {
         for (ASTNode node : nodes) {
             switch (node) {
                 case RecipeDef recipeDef -> {
-                    // Convert ingredients
-                    List<JsonIngredient> ingredients = new ArrayList<>();
+                    // Convert ingredients to flat map (type -> amount)
+                    java.util.Map<String, Integer> ingredients = new HashMap<>();
                     for (IngredientDef ing : recipeDef.ingredients) {
-                        ingredients.add(new JsonIngredient(
-                            ing.ingredientType,
-                            ing.amount,
-                            ing.extraParams != null && !ing.extraParams.isEmpty() ? ing.extraParams : null
-                        ));
+                        ingredients.put(ing.ingredientType, ing.amount);
                     }
                     
-                    // Convert configs
-                    List<JsonConfig> configs = convertConfigs(recipeDef.configs);
+                    // // Convert configs
+                    // List<JsonConfig> configs = convertConfigs(recipeDef.configs);
                     
                     JsonRecipe recipe = new JsonRecipe(
                         "recipe",
@@ -1125,24 +1124,20 @@ public class OriginalRecipeParser {
                         recipeDef.recipeDesc,
                         recipeDef.recipeDescTranslated,
                         ingredients,
-                        recipeDef.technologyConstraint,
-                        configs
+                        recipeDef.technologyConstraint
+                        // configs
                     );
                     recipes.add(recipe);
                 }
                 case DeconstructRecipeDef deconstructRecipeDef -> {
-                    // Convert ingredients
-                    List<JsonIngredient> ingredients = new ArrayList<>();
+                    // Convert ingredients to flat map (type -> amount)
+                    java.util.Map<String, Integer> ingredients = new HashMap<>();
                     for (IngredientDef ing : deconstructRecipeDef.ingredients) {
-                        ingredients.add(new JsonIngredient(
-                            ing.ingredientType,
-                            ing.amount,
-                            ing.extraParams != null && !ing.extraParams.isEmpty() ? ing.extraParams : null
-                        ));
+                        ingredients.put(ing.ingredientType, ing.amount);
                     }
                     
-                    // Convert configs
-                    List<JsonConfig> configs = convertConfigs(deconstructRecipeDef.configs);
+                    // // Convert configs
+                    // List<JsonConfig> configs = convertConfigs(deconstructRecipeDef.configs);
                     
                     JsonRecipe recipe = new JsonRecipe(
                         "deconstruct",
@@ -1151,9 +1146,9 @@ public class OriginalRecipeParser {
                         deconstructRecipeDef.itemTextNameTranslated,
                         deconstructRecipeDef.recipeDesc,
                         deconstructRecipeDef.recipeDescTranslated,
-                        ingredients,
-                        null,
-                        configs
+                        ingredients, 
+                        null
+                        // configs
                     );
                     recipes.add(recipe);
                 }
