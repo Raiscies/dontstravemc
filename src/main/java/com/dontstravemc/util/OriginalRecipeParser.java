@@ -55,32 +55,6 @@ import com.google.gson.annotations.SerializedName;
 
 // ==================== JSON POJO Classes ====================
 
-class JsonIngredient {
-    @SerializedName("type")
-    public String type;
-    
-    @SerializedName("amount")
-    public int amount;
-    
-    @SerializedName("extra")
-    public List<String> extra;
-
-    public JsonIngredient(String type, int amount, List<String> extra) {
-        this.type = type;
-        this.amount = amount;
-        this.extra = extra;
-    }
-}
-
-class JsonConfigValue {
-    // Can be String, Number, String (identifier), or List
-    public Object value;
-
-    public JsonConfigValue(Object value) {
-        this.value = value;
-    }
-}
-
 class JsonConfig {
     public String key;
     public Object value;
@@ -1163,6 +1137,7 @@ public class OriginalRecipeParser {
 
     /**
      * Convert config ListItems to JsonConfig list
+     * unused for now, and it is really not important
      */
     private static List<JsonConfig> convertConfigs(List<ListItem> configs) {
         if (configs == null || configs.isEmpty()) {
@@ -1209,15 +1184,16 @@ public class OriginalRecipeParser {
     private static List<Object> convertListValue(ListValue listValue) {
         List<Object> result = new ArrayList<>();
         for (ListItem item : listValue.items) {
-            if (item.value instanceof ListValue nested) {
-                result.add(convertListValue(nested));
-            } else if (item.value instanceof Term term) {
-                result.add(convertConfigValue(term.value));
-            } else if (item.value instanceof ConfigEntry configEntry) {
-                // For config entries in a list, create a mini map
-                java.util.Map<String, Object> map = new java.util.HashMap<>();
-                map.put(configEntry.key, convertConfigValue(configEntry.value));
-                result.add(map);
+            switch (item.value) {
+                case ListValue nested -> result.add(convertListValue(nested));
+                case Term term -> result.add(convertConfigValue(term.value));
+                case ConfigEntry configEntry -> {
+                    // For config entries in a list, create a mini map
+                    java.util.Map<String, Object> map = new java.util.HashMap<>();
+                    map.put(configEntry.key, convertConfigValue(configEntry.value));
+                    result.add(map);
+                }
+                default -> {}
             }
         }
         return result;
